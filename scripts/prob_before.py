@@ -58,7 +58,15 @@ class prob_graph:
             key = str(round(i, 2))
             self.pta_[key] = self.pat_[key] * self.pt_[key]
 
-        print(sum(self.pta_.values()))
+        # 正規化定数の計算
+        eta = sum(self.pta_.values())
+
+        # p(t|a)の積分が1になるように正規化
+        for i in self.t:
+            key = str(round(i, 2))
+            self.pta_[key] = (self.pat_[key] * self.pt_[key]) / eta
+
+            # print(self.pta_)
 
         self.pt_ = self.pta_.copy()
         self.plot()
@@ -66,7 +74,7 @@ class prob_graph:
 if __name__ == "__main__":
     node = prob_graph()
 
-    for i in range(1):
+    for i in range(5):
         node.foward(SUCCESS[i])
 
     node.draw_graph()
