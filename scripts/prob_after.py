@@ -2,7 +2,7 @@ import numpy as np
 from matplotlib import pyplot as plt
 
 # 改良前の成否
-SUCCESS = [True, False, False, True, True]
+SUCCESS = [True, True, True, True, True]
 
 class prob_graph:
     def __init__(self):
@@ -45,6 +45,7 @@ class prob_graph:
         self.ax.grid(which = "major", axis = "x", color = "gray", alpha = 0.8, linestyle = "-", linewidth = 1)
         self.ax.grid(which = "major", axis = "y", color = "gray", alpha = 0.8, linestyle = "-", linewidth = 1)
         self.ax.spines['left'].set_position(('data', 0))
+        self.ax.spines['right'].set_position(('data', 1.0))
 
     def draw_graph(self):
         plt.show()
