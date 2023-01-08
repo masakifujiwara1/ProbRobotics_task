@@ -2,10 +2,12 @@ import numpy as np
 from matplotlib import pyplot as plt
 
 # 改良前の成否
-SUCCESS = [True, False, False, True, True]
+SUCCESS_b = [True, False, False, True, True]
+# 改良後の成否
+SUCCESS_a = [True, True, True, True, True]
 
 class prob_graph:
-    def __init__(self):
+    def __init__(self, init_fig = True):
         # tを101個の数字に離散化
         self.t = np.arange(0.00, 1.01, 0.01)
 
@@ -21,21 +23,22 @@ class prob_graph:
             self.pt_[str(round(i, 2))] = self.pt
 
         # plot用       
-        self.fig = plt.figure(figsize=(10, 6))
-        self.draw_count = 1
-
-        # 事前分布p(t)を描画
-        self.plot()
+        if init_fig:
+            self.fig = plt.figure(figsize=(10, 3))
+            self.draw_count = 1
 
     def plot(self):
-        self.ax = self.fig.add_subplot(2, 3, self.draw_count)
-        plt.subplots_adjust(wspace = 0.7, hspace = 0.5)
-        self.draw_count += 1
-
+        self.ax = self.fig.add_subplot(1, 3, self.draw_count)
+        
+        plt.subplots_adjust(wspace = 0.7, bottom = 0.2)
+        
         y = []
 
         for i in self.pt_.values():
             y.append(i)
+
+        exec("self.store{} = y.copy()".format(self.draw_count))
+        self.draw_count += 1
 
         plt.plot(self.t, y)
 
@@ -47,7 +50,24 @@ class prob_graph:
         self.ax.spines['left'].set_position(('data', 0))
         self.ax.spines['right'].set_position(('data', 1.0))
 
+    def plots(self):
+        self.ax = self.fig.add_subplot(1, 3, self.draw_count)
+        
+        plt.subplots_adjust(wspace = 0.7, bottom = 0.2)
+        
+        self.ax.plot(self.t, self.store1)
+        self.ax.plot(self.t, self.store2)
+
+        plt.ylim(0, 0.08)
+        plt.ylabel("probability")
+        plt.xlabel("t")
+        self.ax.grid(which = "major", axis = "x", color = "gray", alpha = 0.8, linestyle = "-", linewidth = 1)
+        self.ax.grid(which = "major", axis = "y", color = "gray", alpha = 0.8, linestyle = "-", linewidth = 1)
+        self.ax.spines['left'].set_position(('data', 0))
+        self.ax.spines['right'].set_position(('data', 1.0))
+
     def draw_graph(self):
+        self.plots()
         plt.show()
 
     def foward(self, success):
@@ -74,12 +94,19 @@ class prob_graph:
             self.pta_[key] = (self.pat_[key] * self.pt_[key]) / eta
 
         self.pt_ = self.pta_.copy()
-        self.plot()
+        # self.plot()
 
 if __name__ == "__main__":
     node = prob_graph()
 
     for i in range(5):
-        node.foward(SUCCESS[i])
+        node.foward(SUCCESS_b[i])
+    node.plot()
+    
+    node.__init__(False)
+
+    for i in range(5):
+        node.foward(SUCCESS_a[i])
+    node.plot()
 
     node.draw_graph()

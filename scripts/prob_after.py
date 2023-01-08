@@ -1,7 +1,7 @@
 import numpy as np
 from matplotlib import pyplot as plt
 
-# 改良前の成否
+# 改良後の成否
 SUCCESS = [True, True, True, True, True]
 
 class prob_graph:
