@@ -35,3 +35,15 @@ prob_graphというクラスを作成します.
 43行目では, 離散化したtの各値ごとに密度をプロットしています.
 <br> 45〜51行目では, グラフを描画する際の設定をしています.
 ***
+![Screenshot from 2023-01-09 17-59-26](https://user-images.githubusercontent.com/72371743/211271733-2fc8a95f-a0ed-415f-82c8-c323707f11a5.png)
+73~80行目では, 式(1)で表されるp(a|t)を求めています. 
+```math
+p(a|t) = 
+\left\{
+ \begin{align*}
+ t  （a:完走）\\
+ 1-t  （a:失敗）
+ \end{align*}
+\right.
+\label{a}\tag{1}
+```
