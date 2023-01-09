@@ -17,4 +17,21 @@
 
 ## プログラムの説明（prob_compare.py）
 共通部分が多いため, prob_compare.pyのみ説明します.
-![Screenshot from 2023-01-09 15-32-34](https://user-images.githubusercontent.com/72371743/211252086-22f81cb0-8806-4f75-bc49-d905488a1808.png)
+***
+![Screenshot from 2023-01-09 17-00-33](https://user-images.githubusercontent.com/72371743/211262858-7e3e0bd6-0854-44e0-8bbb-a9d180c0b5bf.png)
+1,2行目では, 必要なモジュールを読み込みます. 
+<br>5,6行目では, 改良前後の試行結果をbool型でリストに格納します.
+***
+![Screenshot from 2023-01-09 17-04-19](https://user-images.githubusercontent.com/72371743/211263386-74793f94-50a5-46e6-81c5-ceebdc25f1f1.png)
+prob_graphというクラスを作成します. 
+<br> 12行目では, 完走率であるtを101個の数字に離散化しています. 
+
+<br> 14,15,16行目では, 空のp(t), p(a|t), p(t|a)を作成しています. 辞書型なのは, 離散化した各値をキーにすることで完走率tの密度をピンポイントで抜き出せるようにするためです.
+
+<br> 19行目では, 事前分布(一様分布)の値を求めています.
+<br> 22,23行目では, 事前分布p(t)を作成しています.
+***
+![Screenshot from 2023-01-09 17-25-34](https://user-images.githubusercontent.com/72371743/211266250-bb7aae12-1613-4116-b4c0-675dfb9bc88c.png)
+43行目では, 離散化したtの各値ごとに密度をプロットしています.
+<br> 45〜51行目では, グラフを描画する際の設定をしています.
+***
