@@ -67,7 +67,6 @@ class prob_graph:
         self.ax.spines['right'].set_position(('data', 1.0))
 
     def draw_graph(self):
-        self.plots()
         plt.show()
 
     def foward(self, success):
@@ -108,5 +107,7 @@ if __name__ == "__main__":
     for i in range(5):
         node.foward(SUCCESS_a[i])
     node.plot()
+
+    node.plots()
 
     node.draw_graph()
