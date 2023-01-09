@@ -48,8 +48,8 @@ class prob_graph:
         plt.xlabel("t")
         self.ax.grid(which = "major", axis = "x", color = "gray", alpha = 0.8, linestyle = "-", linewidth = 1)
         self.ax.grid(which = "major", axis = "y", color = "gray", alpha = 0.8, linestyle = "-", linewidth = 1)
-        # self.ax.spines['left'].set_position(('data', 0))
-        # self.ax.spines['right'].set_position(('data', 1.0))
+        self.ax.spines['left'].set_position(('data', 0))
+        self.ax.spines['right'].set_position(('data', 1.0))
 
     def plots(self):
         self.ax = self.fig.add_subplot(1, 3, self.draw_count)
@@ -120,37 +120,39 @@ if __name__ == "__main__":
 
     key = [k for k, v in error.items() if v == min_v]
 
-    print(key)
+    print("交差するtの値: 約" + str(key[0]))
 
-    avg1 = sum(node.store1.values()) / len(node.t)
-    print(avg1)
-
-    avg2 = sum(node.store2.values()) / len(node.t)
-    print(avg2)
-
+    e1 = []
     sigma1 = []
 
-    for i in node.store1.values():
-        sigma1.append((i-avg1)**2)
-
-    print(sum(sigma1)/101)
-    print(math.sqrt(sum(sigma1)/101))
-
-    e = []
     for i in node.t:
-        e.append(node.store1[str(round(i, 2))] * i)
+        key1 = str(round(i, 2))
+        e1.append(node.store1[key1] * i)
 
-    print("改良前の期待値：" + str(sum(e)))
-
-    e = []
     for i in node.t:
-        e.append(node.store2[str(round(i, 2))] * i)
+        key1 = str(round(i, 2))    
+        sigma1.append(node.store1[key1] * (i - sum(e1))**2)
 
-    print("改良後の期待値：" + str(sum(e)))
+    print("-" * 50)
+    print("改良前のtの期待値：" + str(round(sum(e1), 2)))
+    print("改良前のtの分散：" + str(round(sum(sigma1), 2)))
+    print("改良前のtの偏差：" + str(round(math.sqrt(sum(sigma1)), 2)))
+    print("-" * 50)
 
-    # print(error)
+    e2 = []
+    sigma2 = []
 
-    # [error.remove(0) for i in error]
-    
-    # key = str(node.store1[error.index(min(error))])
-    # print(node.pt_[key])
+    for i in node.t:
+        key2 = str(round(i, 2))
+        e2.append(node.store2[key2] * i)
+
+    for i in node.t:
+        key2 = str(round(i, 2))    
+        sigma2.append(node.store2[key2] * (i - sum(e2))**2)
+
+    # print("-" * 50)
+    print("改良前のtの期待値：" + str(round(sum(e2), 2)))
+    print("改良前のtの分散：" + str(round(sum(sigma2), 2)))
+    print("改良前のtの偏差：" + str(round(math.sqrt(sum(sigma2)), 2)))
+    print("-" * 50)
+
