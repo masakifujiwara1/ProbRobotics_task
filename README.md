@@ -14,3 +14,7 @@
  （改良前後の5回の試行を反映したグラフを重ねて描画）
   - 出力(左：改良前, 中央：改良後, 右：改良前後のグラフを重ねて描画) <br>
 ![Figure_c](https://user-images.githubusercontent.com/72371743/211248828-24b998b2-869e-452b-ab6e-b1b8cab4a225.png)
+
+## プログラムの説明（prob_compare.py）
+共通部分が多いため, prob_compare.pyのみ説明します.
+![Screenshot from 2023-01-09 15-32-34](https://user-images.githubusercontent.com/72371743/211252086-22f81cb0-8806-4f75-bc49-d905488a1808.png)
