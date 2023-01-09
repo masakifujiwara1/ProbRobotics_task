@@ -2,7 +2,7 @@ import numpy as np
 from matplotlib import pyplot as plt
 
 # 改良後の成否
-SUCCESS = [True, True, True, True, True]
+SUCCESS = [True]*5
 
 class prob_graph:
     def __init__(self):

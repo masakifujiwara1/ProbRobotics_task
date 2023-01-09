@@ -5,7 +5,7 @@ import math
 # 改良前の成否
 SUCCESS_b = [True, False, False, True, True]
 # 改良後の成否
-SUCCESS_a = [True, True, True, True, True]
+SUCCESS_a = [True]*5
 
 class prob_graph:
     def __init__(self, init_fig = True):
@@ -132,11 +132,17 @@ if __name__ == "__main__":
     for i in node.t:
         key1 = str(round(i, 2))    
         sigma1.append(node.store1[key1] * (i - sum(e1))**2)
+    
+    max_v1 = max(node.store1.values())
+    key1 = [k for k, v in node.store1.items() if v == max_v1]
 
     print("-" * 50)
+    print("改良前のtの最頻値：" + str(key1[0]))
     print("改良前のtの期待値：" + str(round(sum(e1), 2)))
     print("改良前のtの分散：" + str(round(sum(sigma1), 2)))
     print("改良前のtの偏差：" + str(round(math.sqrt(sum(sigma1)), 2)))
+    print("1シグマ範囲：" + str(round(sum(e1) - 1 * math.sqrt(sum(sigma1)), 2)) + " <= t <= " + str(round(sum(e1) + 1 * math.sqrt(sum(sigma1)), 2)))
+    print("2シグマ範囲：" + str(round(sum(e1) - 2 * math.sqrt(sum(sigma1)), 2)) + " <= t <= " + str(round(sum(e1) + 2 * math.sqrt(sum(sigma1)), 2)))
     print("-" * 50)
 
     e2 = []
@@ -150,9 +156,15 @@ if __name__ == "__main__":
         key2 = str(round(i, 2))    
         sigma2.append(node.store2[key2] * (i - sum(e2))**2)
 
-    # print("-" * 50)
-    print("改良前のtの期待値：" + str(round(sum(e2), 2)))
-    print("改良前のtの分散：" + str(round(sum(sigma2), 2)))
-    print("改良前のtの偏差：" + str(round(math.sqrt(sum(sigma2)), 2)))
-    print("-" * 50)
+    max_v2 = max(node.store2.values())
+    key2 = [k for k, v in node.store2.items() if v == max_v2]
 
+    # print("-" * 50)
+    print("改良後のtの最頻値：" + str(key2[0]))
+    print("改良後のtの期待値：" + str(round(sum(e2), 2)))
+    print("改良後のtの分散：" + str(round(sum(sigma2), 2)))
+    print("改良後のtの偏差：" + str(round(math.sqrt(sum(sigma2)), 2)))
+    print("1シグマ範囲：" + str(round(sum(e2) - 1 * math.sqrt(sum(sigma2)), 2)) + " <= t <= " + str(round(sum(e2) + 1 * math.sqrt(sum(sigma2)), 2)))
+    print("2シグマ範囲：" + str(round(sum(e2) - 2 * math.sqrt(sum(sigma2)), 2)) + " <= t <= " + str(round(sum(e2) + 2 * math.sqrt(sum(sigma2)), 2)))
+
+    print("-" * 50)

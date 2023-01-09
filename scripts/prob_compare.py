@@ -4,7 +4,7 @@ from matplotlib import pyplot as plt
 # 改良前の成否
 SUCCESS_b = [True, False, False, True, True]
 # 改良後の成否
-SUCCESS_a = [True, True, True, True, True]
+SUCCESS_a = [True]*5
 
 class prob_graph:
     def __init__(self, init_fig = True):
