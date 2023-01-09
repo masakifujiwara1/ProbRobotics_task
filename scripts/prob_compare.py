@@ -93,7 +93,6 @@ class prob_graph:
             self.pta_[key] = (self.pat_[key] * self.pt_[key]) / eta
 
         self.pt_ = self.pta_.copy()
-        # self.plot()
 
 if __name__ == "__main__":
     node = prob_graph()
