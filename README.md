@@ -144,9 +144,10 @@ p(t|a_{1:i+1}) = \eta p(a_{i+1}|t)p(t|a_{1:i})
 そのため, 改良後の有効性を検証するために十分な試行回数は, 15回~20回の間に存在すると考えられる.
 
 ## 動作確認
-OS: Ubuntu 20.04 LTS
-Python: 3.8.10
-Numpy: 1.23.2
-Matplotlib: 3.1.2
+- OS: Ubuntu 20.04 LTS
+- Python: 3.8.10
+- Numpy: 1.23.2
+- Matplotlib: 3.1.2
 
 ## LICENSE
+[MIT](https://github.com/masakifujiwara1/ProbRobotics_task/blob/dev/LICENSE)
