@@ -5,7 +5,7 @@ import math
 # 改良前の成否
 SUCCESS_b = [True, False, False, True, True]
 # 改良後の成否
-SUCCESS_a = [True]*5
+SUCCESS_a = [True, True, True, True, True]
 
 class prob_graph:
     def __init__(self, init_fig = True):
@@ -55,9 +55,21 @@ class prob_graph:
         self.ax = self.fig.add_subplot(1, 3, self.draw_count)
         
         plt.subplots_adjust(wspace = 0.7, bottom = 0.2)
+
+        y = []
+
+        for i in self.store1.values():
+            y.append(i)
         
-        self.ax.plot(self.t, self.store1)
-        self.ax.plot(self.t, self.store2)
+        self.ax.plot(self.t, y)
+
+
+        y = []
+
+        for i in self.store2.values():
+            y.append(i)
+
+        self.ax.plot(self.t, y)
 
         plt.ylim(0, 0.08)
         plt.ylabel("probability")
@@ -98,14 +110,25 @@ class prob_graph:
 if __name__ == "__main__":
     node = prob_graph()
 
-    for i in range(5):
-        node.foward(SUCCESS_b[i])
+    origin = 5
+
+    sample = 5
+    N = int(sample/5)
+
+    print("サンプル数：" + str(sample))
+
+    for j in range(N):
+        for i in range(origin):
+            node.foward(SUCCESS_b[i])
+
     node.plot()
     
     node.__init__(False)
 
-    for i in range(5):
-        node.foward(SUCCESS_a[i])
+    for j in range(N):
+        for i in range(origin):
+            node.foward(SUCCESS_a[i])
+
     node.plot()
 
     error = {}
@@ -168,3 +191,17 @@ if __name__ == "__main__":
     print("2シグマ範囲：" + str(round(sum(e2) - 2 * math.sqrt(sum(sigma2)), 2)) + " <= t <= " + str(round(sum(e2) + 2 * math.sqrt(sum(sigma2)), 2)))
 
     print("-" * 50)
+
+    # t検定
+    # s_2 = ((sample - 1) * sum(sigma1) + (sample - 1) * sum(sigma2)) / (sample * 2 - 2)
+    # t = abs((sum(e1) - sum(e2)) / math.sqrt(s_2 * (1 / sample + 1/sample)))
+
+    t = (sum(e1) - sum(e2)) / math.sqrt(sum(sigma1) / 101 + sum(sigma2) / 101)
+    d = (sum(sigma1) / 101 + sum(sigma2) / 101)**2 / ((sum(sigma1)**2 / (101**2 * (101 - 1))) + (sum(sigma2)**2 / (101**2 * (101 - 1))))
+
+    print("t値：" + str(t))
+    print("自由度：" + str(d))
+    print(str(sum(sigma2) / sum(sigma1)))
+
+    node.plots()
+    node.draw_graph()
