@@ -150,4 +150,4 @@ p(t|a_{1:i+1}) = \eta p(a_{i+1}|t)p(t|a_{1:i})
 - Matplotlib: 3.1.2
 
 ## LICENSE
-[MIT](https://github.com/masakifujiwara1/ProbRobotics_task/blob/dev/LICENSE)
+[MIT License](https://github.com/masakifujiwara1/ProbRobotics_task/blob/dev/LICENSE)
